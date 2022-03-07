@@ -1,0 +1,200 @@
+{
+	"info": {
+		"_postman_id": "66eb23c8-9a11-47fb-9493-14f27cc7600a",
+		"name": "tc-app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Device register",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.variables.replaceIn('{{$guid}}')"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"uid\" : {{$guid}},\n    \"app_id\" : 1,\n    \"lang\": \"fr\",\n    \"os\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/register",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Application Purchase",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set('randomNumber', Math.floor(Math.random() * 5));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"client-token\" : \"ccYTzFtcVVSQsrzIxaeeq2PsltOaSV32qcWcnzMancjkLwAO88374OdBL3Ea\",\n    \"app_id\": 3,\n    \"receipt\": {{randomNumber}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/purchase",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"purchase"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GoogleAPI Request",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set('randomNumber', Math.floor(Math.random() * 5));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"receipt\" : {{randomNumber}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/google",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"google"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Subscription",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "cZQ8KbGdPiAc2LbMfo0finNOekuYRSez7mfZ6WGoZZLZugWKxSH9iluFauZL",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "client-token",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/check-sub",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"check-sub"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Device Duplicate Register",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var randUID = pm.variables.replaceIn('{{$guid}}')",
+							"pm.environment.set(\"randUID\", randUID)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"uid\" : \"QcYeqZK6dqFuz3Yc791S5txOsofAPziVSqs3UFIPOSokH1cTZOadV6ifEPO7\",\n    \"app_id\" : 4,\n    \"lang\": \"en\",\n    \"os\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/register",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

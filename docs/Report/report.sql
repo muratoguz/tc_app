@@ -1,0 +1,1 @@
+SELECT COUNT(*), status FROM purchases WHERE expire_date like '2022-03-07%' GROUP BY status;
